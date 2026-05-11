@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <meta name="description" content="A complete static website ready to test and deploy on GitHub Pages. Clean, responsive, and interactive.">
+    <title>GitHub Test Lab | Static Site Ready</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #f6f9fc 0%, #edf2f7 100%);
+            font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+            line-height: 1.5;
+            color: #0a1e2f;
+            padding: 2rem 1rem;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.6);
+            backdrop-filter: blur(1px);
+            border-radius: 2rem;
+            box-shadow: 0 25px 45px -12px rgba(0,0,0,0.2);
+            overflow: hidden;
+            padding: 2rem 1.8rem;
+            transition: all 0.2s ease;
+        }
+
+        /* header area */
+        .hero {
+            text-align: center;
+            margin-bottom: 3rem;
+            border-bottom: 2px solid rgba(0, 115, 230, 0.2);
+            padding-bottom: 1.8rem;
+        }
+        .badge {
+            display: inline-block;
+            background: #0a2b3e;
+            color: #b9f3ff;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.3rem 0.9rem;
+            border-radius: 40px;
+            letter-spacing: 0.3px;
+            margin-bottom: 1rem;
+            backdrop-filter: blur(4px);
+            box-shadow: inset 0 0 2px rgba(255,255,255,0.3), 0 1px 3px rgba(0,0,0,0.1);
+        }
+        h1 {
+            font-size: 2.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #0f2b3d, #1c6e8f);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.01em;
+        }
+        .subhead {
+            font-size: 1.2rem;
+            color: #2c4966;
+            max-width: 680px;
+            margin: 0 auto;
+        }
+        .status-chip {
+            background: #e6fffa;
+            color: #0d6b4e;
+            padding: 0.3rem 1rem;
+            border-radius: 30px;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 1rem;
+            font-size: 0.85rem;
+            font-weight: 500;
+            border: 1px solid #b9f3e0;
+        }
+
+        /* cards grid */
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin: 2.5rem 0 2rem 0;
+        }
+
+        .card {
+            background: white;
+            border-radius: 1.5rem;
+            padding: 1.6rem;
+            box-shadow: 0 12px 24px -12px rgba(0, 0, 0, 0.12);
+            transition: transform 0.2s, box-shadow 0.2s;
+            border: 1px solid rgba(148, 196, 232, 0.3);
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 22px 32px -14px rgba(0, 0, 0, 0.18);
+            border-color: rgba(30, 144, 200, 0.5);
+        }
+        .card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+        .card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: #0e2f44;
+        }
+        .card p {
+            color: #2d4a6e;
+            margin-bottom: 1.25rem;
+        }
+
+        /* demo components inside card */
+        .storage-demo {
+            background: #f0f6fe;
+            border-radius: 1rem;
+            padding: 1rem;
+            margin: 0.75rem 0;
+        }
+        .count-display {
+            font-size: 2rem;
+            font-weight: 800;
+            text-align: center;
+            background: white;
+            border-radius: 60px;
+            padding: 0.2rem;
+            margin: 0.5rem 0;
+            color: #2266aa;
+        }
+        .btn-group {
+            display: flex;
+            gap: 0.7rem;
+            flex-wrap: wrap;
+            margin: 1rem 0 0.6rem;
+        }
+        .btn {
+            background: #eef2f8;
+            border: none;
+            padding: 0.5rem 1rem;
+            border-radius: 60px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            font-size: 0.85rem;
+            font-family: inherit;
+            color: #1f5170;
+        }
+        .btn-primary {
+            background: #1a6d8f;
+            color: white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+        .btn-primary:hover {
+            background: #0d5575;
+            transform: scale(0.97);
+        }
+        .btn-secondary {
+            background: #e2e8f0;
+        }
+        .btn-secondary:hover {
+            background: #cbd5e1;
+        }
+        .last-visit {
+            font-size: 0.8rem;
+            background: #e2edf7;
+            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
+            display: inline-block;
+            margin-top: 0.6rem;
+        }
+        .zen-area {
+            background: #fef9e6;
+            border-radius: 1rem;
+            padding: 0.8rem;
+            margin-top: 0.8rem;
+            font-size: 0.9rem;
+            font-style: italic;
+            border-left: 4px solid #f4b942;
+        }
+        .loader {
+            display: inline-block;
+            width: 12px;
+            height: 12px;
+            border: 2px solid #ccc;
+            border-top-color: #1a6d8f;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+            margin-right: 6px;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* instruction box */
+        .instruction-card {
+            background: #0f1f2c;
+            color: #edf4fa;
+            border-radius: 1.8rem;
+            padding: 1.8rem;
+            margin: 2rem 0 1rem;
+            box-shadow: 0 15px 30px -12px rgba(0,0,0,0.3);
+        }
+        .instruction-card h3 {
+            color: #ffde9c;
+            margin-bottom: 1rem;
+            font-size: 1.5rem;
+        }
+        .instruction-card code {
+            background: #00000044;
+            padding: 0.2rem 0.5rem;
+            border-radius: 12px;
+            font-family: monospace;
+        }
+        .steps {
+            list-style-type: none;
+            margin-top: 1rem;
+        }
+        .steps li {
+            margin-bottom: 0.8rem;
+            display: flex;
+            gap: 12px;
+            align-items: baseline;
+        }
+        .step-number {
+            background: #2d6a8f;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 0.8rem;
+        }
+        footer {
+            text-align: center;
+            margin-top: 2.5rem;
+            padding-top: 1.2rem;
+            border-top: 1px solid #cbdde9;
+            font-size: 0.85rem;
+            color: #3a627e;
+        }
+        @media (max-width: 680px) {
+            .container { padding: 1.2rem; }
+            h1 { font-size: 2rem; }
+            .card h3 { font-size: 1.3rem; }
+        }
+        a {
+            color: #ffde9c;
+            text-decoration: underline;
+        }
+        .inline-code {
+            background: #eef2f8;
+            padding: 0.2rem 0.4rem;
+            border-radius: 8px;
+            font-family: monospace;
+            font-size: 0.8rem;
+            color: #003153;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="hero">
+        <div class="badge">🚀 GITHUB PAGES READY</div>
+        <h1>static test lab</h1>
+        <div class="subhead">Zero build · Pure HTML/CSS/JS · Fully interactive demo &nbsp;✦</div>
+        <div class="status-chip">
+            <span>🟢</span> Live environment — ready to upload & deploy
+        </div>
+    </div>
+
+    <div class="grid">
+        <!-- CARD 1: Static info -->
+        <div class="card">
+            <div class="card-icon">📦</div>
+            <h3>Static Power</h3>
+            <p>Pure HTML, CSS & JavaScript. No dependencies, no build step. Works perfectly on <strong>GitHub Pages</strong> and any static hosting.</p>
+            <div style="background:#eef2fa; border-radius: 1rem; padding: 0.7rem; margin-top: 0.5rem;">
+                <span>✅ Fast loading</span><br>
+                <span>✅ Responsive layout</span><br>
+                <span>✅ Cross-browser</span>
+            </div>
+        </div>
+
+        <!-- CARD 2: LocalStorage & Visit Demo -->
+        <div class="card">
+            <div class="card-icon">🧪</div>
+            <h3>Storage & Session</h3>
+            <p>Test persistent data across page reloads — perfect for checking client storage on GitHub Pages.</p>
+            <div class="storage-demo">
+                <div style="font-weight: 600;">🔢 Click counter</div>
+                <div class="count-display" id="counterValue">0</div>
+                <div class="btn-group">
+                    <button class="btn btn-primary" id="incBtn">+1 Increment</button>
+                    <button class="btn btn-secondary" id="resetCounterBtn">Reset counter</button>
+                </div>
+                <div id="lastVisitDisplay" class="last-visit">🕒 Last visit: --</div>
+                <button id="clearAllDemoBtn" class="btn" style="margin-top: 12px; background:#f0dcdc;">🗑️ Clear demo data</button>
+            </div>
+            <p style="font-size: 0.75rem; margin-top: 0.4rem;">↳ Data saved in <span class="inline-code">localStorage</span> — survives refresh.</p>
+        </div>
+
+        <!-- CARD 3: GitHub API Zen & network test -->
+        <div class="card">
+            <div class="card-icon">✨</div>
+            <h3>GitHub Zen API</h3>
+            <p>Test external fetch call — get an inspiring quote from GitHub’s API. (CORS friendly)</p>
+            <div class="zen-area" id="zenBlock">
+                <span>💡 Click "Fetch Zen" to receive a developer mantra</span>
+            </div>
+            <div class="btn-group" style="margin-top: 15px;">
+                <button class="btn btn-primary" id="fetchZenBtn">✨ Get GitHub Zen</button>
+                <button class="btn btn-secondary" id="clearZenBtn">Clear</button>
+            </div>
+            <p style="font-size: 0.7rem; margin-top: 0.7rem;"><span class="inline-code">GET https://api.github.com/zen</span> demonstrates async network call.</p>
+        </div>
+    </div>
+
+    <!-- GitHub Upload instructions -->
+    <div class="instruction-card">
+        <h3>📤 How to upload this site to GitHub & enable Pages</h3>
+        <ul class="steps">
+            <li><span class="step-number">1</span> <strong>Create a new repository</strong> on GitHub (public or private). Do NOT add README yet.</li>
+            <li><span class="step-number">2</span> <strong>Clone or download</strong> this site: save the content as <code class="inline-code">index.html</code> (and optionally a README.md).</li>
+            <li><span class="step-number">3</span> In your local repo folder, add the file: <code class="inline-code">git add index.html</code> → <code class="inline-code">git commit -m "Initial static site"</code> → <code class="inline-code">git push origin main</code>.</li>
+            <li><span class="step-number">4</span> On GitHub repo → <strong>Settings → Pages</strong> → under "Branch" select <code class="inline-code">main</code> (or <code class="inline-code">master</code>) and <code class="inline-code">/(root)</code> → Save.</li>
+            <li><span class="step-number">5</span> After a minute, your site will be live at: <strong><code>https://&lt;your-username&gt;.github.io/&lt;repo-name&gt;/</code></strong></li>
+        </ul>
+        <div style="margin-top: 1rem; background: #1e3a4d; border-radius: 1rem; padding: 0.6rem 1rem;">
+            ✅ <strong>Pro tip:</strong> you can also drag & drop the <code>index.html</code> file directly into GitHub's web uploader. Enable Pages as above.
+        </div>
+    </div>
+
+    <footer>
+        <p>🧪 Static test website — ready for GitHub Pages deployment | <span id="currentYear"></span> • interactive demo with persistent storage & API test</p>
+        <p style="margin-top: 6px;">⭐ All client-side, no server required. Refresh, close tab — counter and visit time remain.</p>
+    </footer>
+</div>
+
+<script>
+    (function(){
+        // ---------- LOCALSTORAGE HELPERS ----------
+        const STORAGE_KEYS = {
+            counter: 'testLab_counter',
+            lastVisit: 'testLab_lastVisit'
+        };
+
+        // DOM elements
+        const counterSpan = document.getElementById('counterValue');
+        const incBtn = document.getElementById('incBtn');
+        const resetCounterBtn = document.getElementById('resetCounterBtn');
+        const clearAllBtn = document.getElementById('clearAllDemoBtn');
+        const lastVisitSpan = document.getElementById('lastVisitDisplay');
+
+        // Get/Set counter
+        function getCounter() {
+            const stored = localStorage.getItem(STORAGE_KEYS.counter);
+            if (stored === null) return 0;
+            return parseInt(stored, 10);
+        }
+
+        function setCounter(value) {
+            localStorage.setItem(STORAGE_KEYS.counter, value);
+            updateCounterUI();
+        }
+
+        function updateCounterUI() {
+            counterSpan.innerText = getCounter();
+        }
+
+        function incrementCounter() {
+            let current = getCounter();
+            current++;
+            setCounter(current);
+        }
+
+        function resetCounter() {
+            setCounter(0);
+        }
+
+        // Last visit logic
+        function updateLastVisitDisplay() {
+            const lastVisitRaw = localStorage.getItem(STORAGE_KEYS.lastVisit);
+            if (!lastVisitRaw) {
+                lastVisitSpan.innerHTML = "🕒 Last visit: First time! ✨";
+                return;
+            }
+            try {
+                const date = new Date(parseInt(lastVisitRaw, 10));
+                const formatted = date.toLocaleString(undefined, { hour: '2-digit', minute:'2-digit', day:'numeric', month:'short', year:'numeric' });
+                lastVisitSpan.innerHTML = `🕒 Last visit: ${formatted}`;
+            } catch(e) {
+                lastVisitSpan.innerHTML = "🕒 Last visit: unknown";
+            }
+        }
+
+        function setCurrentVisitToStorage() {
+            const now = Date.now();
+            localStorage.setItem(STORAGE_KEYS.lastVisit, now);
+            updateLastVisitDisplay();
+        }
+
+        // Clear all demo data (counter + lastVisit)
+        function clearAllDemoData() {
+            localStorage.removeItem(STORAGE_KEYS.counter);
+            localStorage.removeItem(STORAGE_KEYS.lastVisit);
+            // reset UI to default values (counter 0)
+            setCounter(0);
+            // After clearing lastVisit, we set current visit as new "lastVisit" ?? But to simulate fresh start: 
+            // We'll set current timestamp as new visit (so after clear, page think first visit was now)
+            // However, we should preserve experience: after manual clear, set the current timestamp as last visit (so no first-time message but shows 'just visited')
+            const now = Date.now();
+            localStorage.setItem(STORAGE_KEYS.lastVisit, now);
+            updateLastVisitDisplay();
+            // ensure consistency
+            updateCounterUI();
+            // optional small message feedback
+            const zenBlock = document.getElementById('zenBlock');
+            if(zenBlock && !zenBlock.innerHTML.includes("Demo data")) {
+                // not intrusive
+            }
+            // show quick feedback
+            const tempMsg = document.createElement('div');
+            // not needed but we can notify by making a subtle indicator
+            const clearBtnMsg = document.getElementById('clearAllDemoBtn');
+            const originalText = clearBtnMsg.innerText;
+            clearBtnMsg.innerText = '✓ Cleared!';
+            setTimeout(() => {
+                if(clearBtnMsg) clearBtnMsg.innerText = originalText;
+            }, 1000);
+        }
+
+        // Initialize storage: set default counter if not exists; also ensure lastVisit has something.
+        function initStorageAndUI() {
+            // Counter init
+            if (localStorage.getItem(STORAGE_KEYS.counter) === null) {
+                localStorage.setItem(STORAGE_KEYS.counter, 0);
+            }
+            updateCounterUI();
+            
+            // Last visit: check if exists, if not just set current and display "first time" but store current as first visit
+            const existingLastVisit = localStorage.getItem(STORAGE_KEYS.lastVisit);
+            if (!existingLastVisit) {
+                // first ever visit to site => store current time, but display will show "First time" or something? 
+                // Actually we can store now, but show welcoming message
+                const now = Date.now();
+                localStorage.setItem(STORAGE_KEYS.lastVisit, now);
+                lastVisitSpan.innerHTML = "🕒 Welcome! Your first visit recorded.";
+            } else {
+                updateLastVisitDisplay();
+            }
+            // after showing, we want to update current visit timestamp BUT we must keep the old 'last' before overwriting.
+            // However, behavior: When user sees the page, we set lastVisit to previous stored value AND we update storage to new current time AFTER displaying.
+            const previousVisit = localStorage.getItem(STORAGE_KEYS.lastVisit);
+            if (previousVisit) {
+                updateLastVisitDisplay();
+            }
+            // Now set new current timestamp (this visit becomes future "last visit")
+            const newTimestamp = Date.now();
+            localStorage.setItem(STORAGE_KEYS.lastVisit, newTimestamp);
+            // but if we update it instantly, then lastVisit display will show the new current timestamp? NO, we want to show the old last visit.
+            // we need to store "previous" time as the "last visit" for display but we also need to correctly set new timestamp for future page loads.
+            // More robust: On page load we read old lastVisit, show it, then set storage to current timestamp for next time.
+            const visitBeforeThisLoad = (() => {
+                const storedBefore = localStorage.getItem(STORAGE_KEYS.lastVisit);
+                if(storedBefore && parseInt(storedBefore) !== newTimestamp) return storedBefore;
+                return null;
+            })();
+            if (visitBeforeThisLoad && parseInt(visitBeforeThisLoad) !== newTimestamp) {
+                const oldDate = new Date(parseInt(visitBeforeThisLoad,10));
+                lastVisitSpan.innerHTML = `🕒 Last visit: ${oldDate.toLocaleString(undefined, { hour:'2-digit', minute:'2-digit', day:'numeric', month:'short' })}`;
+            } else {
+                if(!localStorage.getItem(STORAGE_KEYS.lastVisit) || localStorage.getItem(STORAGE_KEYS.lastVisit) == newTimestamp) {
+                    if(localStorage.getItem(STORAGE_KEYS.counter) && parseInt(getCounter()) === 0 && !localStorage.getItem(STORAGE_KEYS.lastVisit)){
+                        lastVisitSpan.innerHTML = "🕒 Last visit: first time 🌟";
+                    } else {
+                        lastVisitSpan.innerHTML = "🕒 Last visit: just now (this session)";
+                    }
+                }
+            }
+            // Then set new timestamp
+            localStorage.setItem(STORAGE_KEYS.lastVisit, newTimestamp);
+            // but final update of display should keep showing old visit? Already handled.
+            // edge refresh: if we update the storage AFTER showing, that's fine.
+        }
+
+        // -------------------------------------------------
+        // Zen API logic (GitHub)
+        const zenBlock = document.getElementById('zenBlock');
+        const fetchZenBtn = document.getElementById('fetchZenBtn');
+        const clearZenBtn = document.getElementById('clearZenBtn');
+
+        async function fetchGitHubZen() {
+            if (!zenBlock) return;
+            zenBlock.innerHTML = `<div class="loader"></div> Fetching wisdom from GitHub...`;
+            try {
+                const controller = new AbortController();
+                const timeoutId = setTimeout(() => controller.abort(), 5000);
+                const response = await fetch('https://api.github.com/zen', {
+                    signal: controller.signal,
+                    headers: { 'Accept': 'application/json' }
+                });
+                clearTimeout(timeoutId);
+                if (!response.ok) throw new Error(`HTTP ${response.status}`);
+                const text = await response.text();
+                zenBlock.innerHTML = `<span>🧠 “${text.trim()}”</span><span style="display:block; font-size:0.7rem; margin-top:0.3rem;">— GitHub Zen</span>`;
+            } catch (error) {
+                console.warn("Zen fetch error:", error);
+                zenBlock.innerHTML = `<span>⚠️ Could not fetch Zen. Check network or GitHub API (still CORS-friendly but might be rate-limited).</span><span style="display:block; font-size:0.7rem;">💡 Try again later!</span>`;
+            }
+        }
+
+        function clearZen() {
+            zenBlock.innerHTML = `<span>💡 Click "Fetch Zen" to receive a developer mantra</span>`;
+        }
+
+        // set events
+        incBtn.addEventListener('click', () => {
+            incrementCounter();
+        });
+        resetCounterBtn.addEventListener('click', () => {
+            resetCounter();
+        });
+        clearAllBtn.addEventListener('click', clearAllDemoData);
+        fetchZenBtn.addEventListener('click', fetchGitHubZen);
+        clearZenBtn.addEventListener('click', clearZen);
+
+        // Initialize counter and last visit display correctly
+        // setup more robust: we will fix last visit displaying without conflict
+        function finalInit() {
+            // Ensure counter always numeric
+            if (localStorage.getItem(STORAGE_KEYS.counter) === null) localStorage.setItem(STORAGE_KEYS.counter, '0');
+            updateCounterUI();
+            
+            // handle last visit: store previous visit and update lastVisit UI, then store new current visit
+            const oldVisit = localStorage.getItem(STORAGE_KEYS.lastVisit);
+            const now = Date.now();
+            if (oldVisit && !isNaN(parseInt(oldVisit,10))) {
+                const oldDate = new Date(parseInt(oldVisit,10));
+                lastVisitSpan.innerHTML = `🕒 Last visit: ${oldDate.toLocaleString(undefined, { weekday: 'short', hour:'2-digit', minute:'2-digit', day:'numeric', month:'short' })}`;
+            } else {
+                lastVisitSpan.innerHTML = `🕒 Last visit: first time on this device`;
+            }
+            // update to new current timestamp for next page load
+            localStorage.setItem(STORAGE_KEYS.lastVisit, now);
+        }
+        
+        // Add year to footer
+        const yearSpan = document.getElementById('currentYear');
+        if(yearSpan) yearSpan.innerText = new Date().getFullYear();
+        
+        // also watch for unload? not needed.
+        finalInit();
+
+        // Additional: Also add clear detection re-render on buttons update 
+        // ensure after resetting counter or clear demo data, last visit & counter consistent 
+        const originalClearAll = clearAllDemoBtn.onclick;
+        clearAllDemoBtn.onclick = (e) => {
+            e.preventDefault();
+            localStorage.removeItem(STORAGE_KEYS.counter);
+            localStorage.removeItem(STORAGE_KEYS.lastVisit);
+            // set fresh state: counter 0, new lastvisit set to current timestamp
+            localStorage.setItem(STORAGE_KEYS.counter, '0');
+            const newTime = Date.now();
+            localStorage.setItem(STORAGE_KEYS.lastVisit, newTime);
+            updateCounterUI();
+            lastVisitSpan.innerHTML = `🕒 Last visit: just reset — now recording current visit`;
+            // also provide small visual on button
+            const btnEl = document.getElementById('clearAllDemoBtn');
+            const originalText = btnEl.innerText;
+            btnEl.innerText = '✨ Data cleared!';
+            setTimeout(() => { if(btnEl) btnEl.innerText = originalText; }, 1000);
+        };
+        
+        // fix increment and reset with UI update bond (already ok)
+        // re-attach to be safe
+        incBtn.onclick = () => {
+            let cur = getCounter();
+            cur++;
+            localStorage.setItem(STORAGE_KEYS.counter, cur);
+            updateCounterUI();
+        };
+        resetCounterBtn.onclick = () => {
+            localStorage.setItem(STORAGE_KEYS.counter, '0');
+            updateCounterUI();
+        };
+        // final polish
+        if (!localStorage.getItem(STORAGE_KEYS.counter)) localStorage.setItem(STORAGE_KEYS.counter, '0');
+        updateCounterUI();
+    })();
+</script>
+</body>
+</html>
